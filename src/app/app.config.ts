@@ -1,13 +1,16 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { InjectionToken } from '@angular/core';
+import { AppConfigServer, IAppConfigServer } from './app.config.server';
 
-import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+export interface AppConfig {
+  server: any; // Change to actual type if available
+  appName: string;
+  pageSize: number;
+}
 
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection(),
-    provideRouter(routes), provideClientHydration(withEventReplay())
-  ]
+export const APP_CONFIG = new InjectionToken<AppConfig>('app.config');
+
+export const AppConfigValue: AppConfig = {
+  server: AppConfigServer,
+  appName: 'MyAngularApp',
+  pageSize: 10
 };

@@ -1,0 +1,45 @@
+<div class="client-grid">
+  <h2>Clients</h2>
+  <button type="button" class="btn btn-secondary" (click)="AddClient()">Add Client</button>
+  <div class="filters">
+    <input
+      type="text"
+      placeholder="Search by Name"
+      [(ngModel)]="searchName"
+      (input)="applyFilters()"
+    />
+
+    <select [(ngModel)]="searchGender" (change)="applyFilters()">
+      <option value="">All Genders</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <input
+      type="date"
+      [(ngModel)]="searchDOB"
+      (change)="applyFilters()"
+    />
+  </div>
+<div class="table client-table">
+  <table>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>Date of Birth</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of filteredClients">
+        <td>{{ client.firstName }}</td>
+        <td>{{ client.lastName }}</td>
+        <td>{{ client.gender }}</td>
+        <td>{{ client.dob | date }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  

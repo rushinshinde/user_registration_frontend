@@ -1,8 +1,10 @@
-import { BootstrapContext, bootstrapApplication } from '@angular/platform-browser';
-import { App } from './app/app';
-import { config } from './app/app.config.server';
+import 'zone.js/node';
+import { renderModule } from '@angular/platform-server';
+import { AppServerModule } from './app/app.server.module';
 
-const bootstrap = (context: BootstrapContext) =>
-    bootstrapApplication(App, config, context);
-
-export default bootstrap;
+export default function main(): Promise<void> {
+  return renderModule(AppServerModule, {
+    document: '<app-root></app-root>',
+    url: '/'
+  }).then(() => {});
+}
