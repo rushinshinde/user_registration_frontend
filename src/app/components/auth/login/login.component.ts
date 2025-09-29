@@ -18,22 +18,30 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object // <-- Inject PLATFORM_ID
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   login() {
+    if(this.email !== '' && this.password !== ''){
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: (response) => {
         if(response.success) {
-        if (isPlatformBrowser(this.platformId)) { // <-- Browser check for SSR
+        if (isPlatformBrowser(this.platformId)) { 
           localStorage.setItem('token', response.token);
+          localStorage.setItem('username', response.username);
         }
-        this.router.navigate(['/clients']);
+        this.router.navigate(['/clients']).then(() => {
+          window.location.reload();
+        });
       } else {
-        alert('Login failed: ' + response.success);
+        alert(response.message);
       } 
       },
       error: (err) => alert('Login failed')
     });
   }
+  else{
+    alert('Please enter email and password');
+  }
+}
 }

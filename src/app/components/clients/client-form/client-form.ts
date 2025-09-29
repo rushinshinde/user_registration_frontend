@@ -52,7 +52,7 @@ export class ClientFormComponent{
     this.clientService.addClient(this.client).subscribe({
       next: () => {
         alert('Client added successfully');
-        this.clientAdded.emit(); // Notify parent component
+        this.clientAdded.emit();
         this.resetForm();
 
         this.router.navigate(['/clients']);

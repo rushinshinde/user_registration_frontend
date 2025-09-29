@@ -1,6 +1,5 @@
 <div class="client-grid">
   <h2>Clients</h2>
-  <button type="button" class="btn btn-secondary" (click)="AddClient()">Add Client</button>
   <div class="filters">
     <input
       type="text"
@@ -22,6 +21,8 @@
       (change)="applyFilters()"
     />
   </div>
+  
+<button type="button" class="btn btn-secondary" (click)="AddClient()">Add Client</button>
 <div class="table client-table">
   <table>
     <thead>

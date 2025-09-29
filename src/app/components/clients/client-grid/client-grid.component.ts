@@ -63,7 +63,6 @@ export class ClientGridComponent implements OnInit {
   login() {
     if (isPlatformBrowser(this.platformId)) {
       console.log('Login attempt with:', this.email, this.password);
-      // You can integrate AuthService.login() here if needed
     }
   }
 

@@ -12,11 +12,11 @@ export class AuthService {
   ) {}
 
   register(user: any) {
-    return this.http.post(`${this.config.server.apiUrl}${this.config.server.auth.register}`, user);
+    return this.http.post<{ data:any; username: string, success: string, message:string }>(`${this.config.server.apiUrl}${this.config.server.auth.register}`, user);
   }
 
   login(credentials: any) {
-    return this.http.post<{ token: string; username: string, success: string }>(
+    return this.http.post<{ token: string; username: string, success: string, message:string }>(
       `${this.config.server.apiUrl}${this.config.server.auth.login}`,
       credentials
     );

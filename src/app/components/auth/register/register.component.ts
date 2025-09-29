@@ -34,14 +34,17 @@ export class RegisterComponent {
     });
   }
 
-  register() {
-    if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
-
+  Register() {
     this.authService.register(this.registerForm.value).subscribe({
-      next: () => this.router.navigate(['/login']),
+      next: (response) => {
+        if(response.success) {
+          alert('Registration Successful');
+        this.router.navigate(['/login']);        
+        }
+        else{
+          alert(response.message || 'Registration failed')
+        }
+      },
       error: (err) => alert(err.error.message || 'Registration failed')
     });
   }
